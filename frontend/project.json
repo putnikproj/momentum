@@ -1,0 +1,43 @@
+{
+  "name": "frontend",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "frontend/src",
+  "tags": [],
+  "targets": {
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "frontend:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "frontend:build",
+        "port": 4200,
+        "spa": true
+      }
+    },
+    "serve-ssr": {
+      "continuous": true,
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "frontend:build:development",
+          "serverTarget": "frontend:server:development"
+        },
+        "production": {
+          "browserTarget": "frontend:build:production",
+          "serverTarget": "frontend:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    }
+  }
+}
