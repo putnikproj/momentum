@@ -88,7 +88,7 @@ importers:
         specifier: ^11.0.0
         version: 11.1.12(@nestjs/common@11.1.12(reflect-metadata@0.1.14)(rxjs@7.8.2))(@nestjs/core@11.1.12)(@nestjs/platform-express@11.1.12)
       '@nx/angular':
-        specifier: ^22.3.3
+        specifier: 22.3.3
         version: 22.3.3(2f9eec55f5481302a80b0d7d26579082)
       '@nx/angular-rspack':
         specifier: 22.3.3

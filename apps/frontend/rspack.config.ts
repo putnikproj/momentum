@@ -6,7 +6,7 @@ export default createConfig(
       root: __dirname,
 
       outputPath: {
-        base: '../dist/frontend',
+        base: '../../dist/apps/frontend',
       },
       index: './src/index.html',
       browser: './src/main.ts',

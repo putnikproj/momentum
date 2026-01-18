@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "strict": true,
     "noImplicitOverride": true,
@@ -28,7 +28,7 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "frontend/tsconfig.server.json"
+      "path": "apps/frontend/tsconfig.server.json"
     }
   ],
   "ts-node": {

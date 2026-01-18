@@ -1,10 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
@@ -43,9 +40,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": [
-        "backend-e2e/**/*"
-      ]
+      "exclude": ["apps/backend-e2e/**/*", "apps/backend-e2e/**/*"]
     },
     {
       "plugin": "@nx/angular/plugin",
@@ -77,13 +72,8 @@
   "targetDefaults": {
     "@angular-devkit/build-angular:browser": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "server": {
       "cache": true
