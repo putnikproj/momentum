@@ -39,6 +39,7 @@
     "@nx/angular": "22.3.3",
     "@nx/angular-rspack": "22.3.3",
     "@nx/cypress": "22.3.3",
+    "@nx/docker": "22.3.3",
     "@nx/eslint": "22.3.3",
     "@nx/eslint-plugin": "22.3.3",
     "@nx/jest": "22.3.3",

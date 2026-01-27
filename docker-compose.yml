@@ -1,0 +1,53 @@
+networks:
+  momentum:
+    driver: bridge
+
+services:
+  momentum-base:
+    container_name: momentum-base
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    image: momentum-base
+
+  backend:
+    container_name: backend
+    build:
+      context: ./
+      cache_from:
+        - momentum-base
+      dockerfile: ./apps/backend/Dockerfile
+      args:
+        NODE_ENV: "production"
+        BUILD_FLAG: ""
+    image: momentum-backend
+    ports:
+      - 3000:3000
+    environment:
+      NODE_ENV: "production"
+      PORT: 3000
+    networks:
+      - momentum
+    depends_on:
+      - momentum-base
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./
+      cache_from:
+        - nginx:1.29.4
+      dockerfile: ./apps/frontend/Dockerfile
+      args:
+        NODE_ENV: "production"
+        BUILD_FLAG: ""
+    image: momentum-frontend
+    ports:
+      - 80:80
+    environment:
+      NODE_ENV: "production"
+      PORT: 80
+    networks:
+      - momentum
+    depends_on:
+      - momentum-base
