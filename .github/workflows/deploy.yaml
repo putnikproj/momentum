@@ -19,6 +19,8 @@ jobs:
 
       - name: Build all apps
         run: pnpm nx run-many --target=build --all --parallel=6
+        env:
+          NX_API_URL: ${{ secrets.NX_API_URL }}
 
       - name: Deploy all projects to Railway
         run: ./deployment/railway-deploy-all.sh
