@@ -16,7 +16,21 @@ trap cleanup EXIT
 
 # Install the Railway CLI
 echo "Installing Railway CLI version $RAILWAY_VERSION..."
-VERSION="$RAILWAY_VERSION" INSTALL_DIR="$RAILWAY_BINARY" sh -c "$(curl -sSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh)"
+mkdir -p /tmp
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh)" -- -d "$RAILWAY_BINARY"
+
+# The install script creates a 'railway' binary in the specified directory
+if [ -f "$RAILWAY_BINARY/railway" ]; then
+    RAILWAY_BINARY="$RAILWAY_BINARY/railway"
+elif [ -f "$RAILWAY_BINARY" ]; then
+    # Already correct path
+    :
+else
+    echo "❌ Error: Railway CLI installation failed"
+    exit 1
+fi
+
+chmod +x "$RAILWAY_BINARY"
 $RAILWAY_BINARY version
 
 # Construct the token environment variable name
