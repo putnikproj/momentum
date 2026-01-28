@@ -29,7 +29,7 @@ all_projects=$(pnpm nx show projects --type=app | grep -v 'e2e')
 for project in $all_projects
 do
     echo "================================================"
-    echo "Deploying: '$project' to environment: $RAILWAY_ENVIRONMENT"
+    echo "Deploying: '$project' to service: '$project', environment: $RAILWAY_ENVIRONMENT"
 
     # Deploy pre-built artifacts from the Nx build output directory
     build_path="dist/apps/$project"
@@ -40,9 +40,9 @@ do
         continue
     fi
 
-    # Deploy the built artifacts
+    # Deploy the built artifacts to the specific service
     cd "$build_path"
-    railway up --detach --environment "$RAILWAY_ENVIRONMENT"
+    railway up --detach --service "$project" --environment "$RAILWAY_ENVIRONMENT"
     cd - > /dev/null
 
     echo "✓ Deployment triggered for $project"

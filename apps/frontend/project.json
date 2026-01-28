@@ -10,7 +10,10 @@
       "executor": "@nx/angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/frontend",
+        "outputPath": {
+          "base": "dist/apps/frontend",
+          "browser": ""
+        },
         "browser": "apps/frontend/src/main.ts",
         "tsConfig": "apps/frontend/tsconfig.app.json",
         "assets": [
@@ -76,7 +79,7 @@
       "options": {
         "buildTarget": "frontend:build",
         "port": 4200,
-        "staticFilePath": "dist/apps/frontend/browser",
+        "staticFilePath": "dist/apps/frontend",
         "spa": true
       }
     }
