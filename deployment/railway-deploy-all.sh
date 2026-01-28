@@ -16,21 +16,21 @@ trap cleanup EXIT
 
 # Install the Railway CLI
 echo "Installing Railway CLI version $RAILWAY_VERSION..."
-mkdir -p /tmp
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh)" -- -d "$RAILWAY_BINARY"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/railwayapp/cli/master/install.sh)" s _ "$RAILWAY_VERSION" /tmp
 
-# The install script creates a 'railway' binary in the specified directory
-if [ -f "$RAILWAY_BINARY/railway" ]; then
-    RAILWAY_BINARY="$RAILWAY_BINARY/railway"
-elif [ -f "$RAILWAY_BINARY" ]; then
-    # Already correct path
-    :
+# Find the railway binary (the installer may create it in different locations)
+if [ -f "/tmp/railway" ]; then
+    RAILWAY_BINARY="/tmp/railway"
+elif [ -f "$HOME/.railway/bin/railway" ]; then
+    RAILWAY_BINARY="$HOME/.railway/bin/railway"
+elif command -v railway &> /dev/null; then
+    RAILWAY_BINARY="railway"
 else
-    echo "❌ Error: Railway CLI installation failed"
+    echo "❌ Error: Railway CLI not found after installation"
     exit 1
 fi
 
-chmod +x "$RAILWAY_BINARY"
+echo "Using Railway CLI at: $RAILWAY_BINARY"
 $RAILWAY_BINARY version
 
 # Construct the token environment variable name
@@ -59,18 +59,18 @@ do
     echo "================================================"
     echo "Processing: '$project'..."
     
-    # Change to project directory
-    project_path="apps/$project"
+    # Use the build output directory
+    project_path="dist/apps/$project"
     
     if [ ! -d "$project_path" ]; then
-        echo "⚠️  Warning: Project directory not found: $project_path"
+        echo "⚠️  Warning: Build directory not found: $project_path"
         echo "Skipping deployment for $project"
         continue
     fi
     
-    echo "✓ Deploying $project to Railway environment: $RAILWAY_ENVIRONMENT"
+    echo "✓ Deploying $project from $project_path to Railway environment: $RAILWAY_ENVIRONMENT"
     
-    # Trigger the deploy using the single Railway token
+    # Trigger the deploy from the build directory using the single Railway token
     cd "$project_path"
     RAILWAY_TOKEN="$railway_token" $RAILWAY_BINARY up --detach
     cd - > /dev/null
