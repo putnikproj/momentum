@@ -11,7 +11,7 @@ if ! command -v railway &> /dev/null; then
 fi
 
 echo "Railway CLI version:"
-railway help --version
+railway --version help
 
 # Validate RAILWAY_TOKEN is set
 if [ -z "${RAILWAY_TOKEN:-}" ]; then
