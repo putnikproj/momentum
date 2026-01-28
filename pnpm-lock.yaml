@@ -65,6 +65,9 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ~21.0.0
@@ -216,9 +219,6 @@ importers:
       ts-node:
         specifier: 10.9.1
         version: 10.9.1(@swc/core@1.5.29(@swc/helpers@0.5.18))(@types/node@20.19.9)(typescript@5.9.3)
-      tslib:
-        specifier: ^2.3.0
-        version: 2.8.1
       typescript:
         specifier: ~5.9.2
         version: 5.9.3
