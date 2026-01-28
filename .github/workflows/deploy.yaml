@@ -1,0 +1,27 @@
+name: Deploy all projects
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build all
+        run: pnpm nx run-many --target=build --all --parallel=6
+
+      - name: Deploy all projects
+        run: ./deployment/railway-deploy-all.sh
+        env:
+          RAILWAY_TOKEN__MOMENTUM_PRODUCTION: ${{ secrets.RAILWAY_TOKEN__MOMENTUM_PRODUCTION }}
+          RAILWAY_ENVIRONMENT: production
