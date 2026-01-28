@@ -58,23 +58,23 @@ for project in $all_projects
 do
     echo "================================================"
     echo "Processing: '$project'..."
-    
+
     # Use the build output directory
     project_path="dist/apps/$project"
-    
+
     if [ ! -d "$project_path" ]; then
         echo "⚠️  Warning: Build directory not found: $project_path"
         echo "Skipping deployment for $project"
         continue
     fi
-    
+
     echo "✓ Deploying $project from $project_path to Railway environment: $RAILWAY_ENVIRONMENT"
-    
+
     # Trigger the deploy from the build directory using the single Railway token
     cd "$project_path"
     RAILWAY_TOKEN="$railway_token" $RAILWAY_BINARY up --detach
     cd - > /dev/null
-    
+
     echo "✓ Deployment triggered for $project"
 done
 
