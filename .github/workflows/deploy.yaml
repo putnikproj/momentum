@@ -17,11 +17,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build all
+      - name: Build all apps
         run: pnpm nx run-many --target=build --all --parallel=6
 
-      - name: Deploy all projects
+      - name: Deploy all projects to Railway
         run: ./deployment/railway-deploy-all.sh
         env:
-          RAILWAY_TOKEN__MOMENTUM_PRODUCTION: ${{ secrets.RAILWAY_TOKEN__MOMENTUM_PRODUCTION }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           RAILWAY_ENVIRONMENT: production
