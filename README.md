@@ -1,5 +1,9 @@
 # Momentum
 
+> **Note**
+>
+> I abandoned this project because I just don't care about it anymore. It wasn't exciting for me, so I decided to move on rather than force myself to finish something I wasn't passionate about.
+
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
